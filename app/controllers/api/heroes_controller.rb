@@ -6,6 +6,13 @@ class Api::HeroesController < ApplicationController
     end
   end
 
+  def show
+    mock_heroes
+    respond_to do |format|
+      format.json {render json: @heroes.select {|hero| hero[:id] == params[:id].to_i}.first }
+    end
+  end
+
   private
   def mock_heroes
     @heroes = [
